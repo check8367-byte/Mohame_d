@@ -1,37 +1,147 @@
-
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Mahmoud | Profile</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Radio Player</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      padding: 40px 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .link-card {
+      display: block;
+      margin: 10px auto;
+      padding: 12px 20px;
+      width: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .link-card:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 11px;
+      opacity: 0.6;
+    }
+
+    /* زر الصوت */
+    #musicBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: 0.3s;
+      color: white;
+      font-size: 22px;
+    }
+
+    #musicBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #musicBtn.playing {
+      background: rgba(0, 255, 150, 0.2);
+      border-color: rgba(0, 255, 150, 0.5);
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="music-btn" id="musicBtn"><span>🔇</span></div>
+  <div class="container">
+    <h1>📻 إذاعة القرآن الكريم</h1>
 
-    <div class="container">
-        <img src="https://i.postimg.cc/nVNvqCxd/54c7d667a257a66718129902a14b90b3-(1).jpg" alt="Mohamed Mahmoud" class="profile-img">
-        
-        <h1>Mohamed Mahmoud</h1>
-        <p class="welcome-text">Welcome To My World</p>
+    <a href="https://91993905443298.sarhne.com" class="link-card" target="_blank">
+      Sarhne
+    </a>
 
-        <div class="links-container">
-            <a href="https://t.me/Mohame_d0" class="link-card" target="_blank">My account</a>
-            <a href="https://t.me/Ta3at_Allah_Life" class="link-card" target="_blank">My channel</a>
-            <a href="https://wa.me/201272038295" class="link-card" target="_blank">WhatsApp</a>
-            <a href="https://www.tiktok.com/@mohme_d6" class="link-card" target="_blank">TikTok</a>
-            
-            <a href="https://www.facebook.com/share/1aR3273mpV/" class="link-card" target="_blank">Facebook</a>
-            
-            <a href="https://91993905443298.sarhne.com" class="link-card" target="_blank">Sarhne</a>
-        </div>
+    <footer>Mohamed Mahmoud © 2026</footer>
+  </div>
 
-        <footer>Mohamed Mahmoud 2026 ©</footer>
-    </div>
+  <!-- زر التشغيل -->
+  <div id="musicBtn">
+    <span>🔇</span>
+  </div>
 
-    <audio id="audio"></audio>
-    <script src="script.js"></script>
+  <!-- الصوت -->
+  <audio id="audio"></audio>
+
+  <script>
+    const audio = document.getElementById("audio");
+    const musicBtn = document.getElementById("musicBtn");
+    const icon = musicBtn.querySelector("span");
+
+    // بث إذاعة القرآن الكريم
+    const stream = "https://stream.radiojar.com/8s5u5tpdtwzuv";
+
+    let playing = false;
+
+    audio.src = stream;
+    audio.volume = 0.7;
+    audio.preload = "none";
+
+    function playAudio() {
+      audio.play()
+        .then(() => {
+          playing = true;
+          icon.textContent = "🔊";
+          musicBtn.classList.add("playing");
+        })
+        .catch((err) => {
+          console.log("Autoplay blocked:", err);
+        });
+    }
+
+    function pauseAudio() {
+      audio.pause();
+      playing = false;
+      icon.textContent = "🔇";
+      musicBtn.classList.remove("playing");
+    }
+
+    musicBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      playing ? pauseAudio() : playAudio();
+    });
+
+    document.addEventListener("click", () => {
+      if (!playing) playAudio();
+    }, { once: true });
+
+    audio.addEventListener("error", () => {
+      console.log("Stream error");
+      pauseAudio();
+    });
+  </script>
+
 </body>
 </html>
