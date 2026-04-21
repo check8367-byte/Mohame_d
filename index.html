@@ -4,96 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohamed Mahmoud | Profile</title>
-
     <style>
+        /* كود الـ CSS الخاص بك */
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0f0f0f;
+            padding: 0;
+            background: #121212;
             color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             text-align: center;
         }
 
         .container {
-            padding: 30px;
+            width: 90%;
+            max-width: 400px;
         }
 
         .profile-img {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid white;
-            margin-top: 20px;
-        }
-
-        h1 {
-            margin: 10px 0 5px;
+            border: 3px solid #1DB954;
+            margin-bottom: 15px;
         }
 
         .welcome-text {
-            opacity: 0.7;
-            margin-bottom: 20px;
+            color: #888;
+            margin-bottom: 25px;
         }
 
         .links-container {
-            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .link-card {
-            display: block;
-            margin: 10px auto;
-            padding: 12px 20px;
-            width: 220px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            text-decoration: none;
+            background: #1e1e1e;
             color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 10px;
             transition: 0.3s;
+            border: 1px solid #333;
         }
 
         .link-card:hover {
+            background: #1DB954;
             transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        footer {
-            margin-top: 50px;
-            font-size: 11px;
-            opacity: 0.6;
         }
 
         .music-btn {
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 45px;
-            height: 45px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             cursor: pointer;
             z-index: 100;
             transition: 0.3s;
         }
 
-        .music-btn.playing {
-            background: rgba(0,255,150,0.2);
-            border-color: rgba(0,255,150,0.5);
+        footer { 
+            margin-top: 50px; 
+            font-size: 11px; 
+            opacity: 0.6; 
         }
     </style>
 </head>
-
 <body>
 
     <div class="music-btn" id="musicBtn"><span>🔇</span></div>
 
     <div class="container">
-        <img src="https://i.postimg.cc/nVNvqCxd/54c7d667a257a66718129902a14b90b3-(1).jpg" class="profile-img">
-
+        <img src="https://i.postimg.cc/nVNvqCxd/54c7d667a257a66718129902a14b90b3-(1).jpg" alt="Mohamed Mahmoud" class="profile-img">
+        
         <h1>Mohamed Mahmoud</h1>
         <p class="welcome-text">Welcome To My World</p>
 
@@ -112,48 +106,60 @@
     <audio id="audio"></audio>
 
     <script>
-        // بث إذاعة القرآن الكريم
+        // كود الـ JavaScript الخاص بك مع الرابط المطلوب
         const audio = document.getElementById("audio");
         const musicBtn = document.getElementById("musicBtn");
         const icon = musicBtn.querySelector("span");
 
-        const stream = "https://stream.radiojar.com/8s5u5tpdtwzuv";
+        // الرابط الذي قدمته أنت
+        const stream = "https://live.mp3quran.net:8006/;stream.mp3";
 
         let playing = false;
 
+        // تجهيز الصوت مرة واحدة
         audio.src = stream;
         audio.volume = 0.7;
         audio.preload = "none";
 
         function playAudio() {
-            audio.play()
-                .then(() => {
-                    playing = true;
-                    icon.textContent = "🔊";
-                    musicBtn.classList.add("playing");
-                })
-                .catch(err => console.log(err));
+          audio.play()
+            .then(() => {
+              playing = true;
+              icon.textContent = "🔊";
+              musicBtn.classList.add("playing");
+            })
+            .catch((err) => {
+              console.log("المتصفح منع التشغيل:", err);
+            });
         }
 
         function pauseAudio() {
-            audio.pause();
-            playing = false;
-            icon.textContent = "🔇";
-            musicBtn.classList.remove("playing");
+          audio.pause();
+          playing = false;
+          icon.textContent = "🔇";
+          musicBtn.classList.remove("playing");
         }
 
+        // زر التشغيل
         musicBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            playing ? pauseAudio() : playAudio();
+          e.stopPropagation();
+          playing ? pauseAudio() : playAudio();
         });
 
+        // أول تفاعل من المستخدم (حل مشكلة الموبايل)
         document.addEventListener("click", () => {
-            if (!playing) playAudio();
+          if (!playing) playAudio();
         }, { once: true });
 
-        audio.addEventListener("error", () => pauseAudio());
-        audio.addEventListener("ended", () => pauseAudio());
-    </script>
+        // معالجة الأخطاء
+        audio.addEventListener("error", () => {
+          console.log("حصل خطأ في البث");
+          pauseAudio();
+        });
 
+        audio.addEventListener("ended", () => {
+          pauseAudio();
+        });
+    </script>
 </body>
 </html>
