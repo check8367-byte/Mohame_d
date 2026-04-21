@@ -4,81 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohamed Mahmoud | Profile</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* كود الـ CSS الخاص بك */
-        body {
-            margin: 0;
-            padding: 0;
-            background: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 400px;
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #1DB954;
-            margin-bottom: 15px;
-        }
-
-        .welcome-text {
-            color: #888;
-            margin-bottom: 25px;
-        }
-
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .link-card {
-            background: #1e1e1e;
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 10px;
-            transition: 0.3s;
-            border: 1px solid #333;
-        }
-
-        .link-card:hover {
-            background: #1DB954;
-            transform: translateY(-3px);
-        }
-
+        /* الـ CSS اللي بعته بالحرف */
         .music-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
             justify-content: center;
-            align-items: center;
             cursor: pointer;
             z-index: 100;
             transition: 0.3s;
         }
 
-        footer { 
-            margin-top: 50px; 
-            font-size: 11px; 
-            opacity: 0.6; 
-        }
+        footer { margin-top: 50px; font-size; font-size: 11px; opacity: 0.6; }
     </style>
 </head>
 <body>
@@ -96,7 +32,9 @@
             <a href="https://t.me/Ta3at_Allah_Life" class="link-card" target="_blank">My channel</a>
             <a href="https://wa.me/201272038295" class="link-card" target="_blank">WhatsApp</a>
             <a href="https://www.tiktok.com/@mohme_d6" class="link-card" target="_blank">TikTok</a>
+            
             <a href="https://www.facebook.com/share/1aR3273mpV/" class="link-card" target="_blank">Facebook</a>
+            
             <a href="https://91993905443298.sarhne.com" class="link-card" target="_blank">Sarhne</a>
         </div>
 
@@ -106,12 +44,12 @@
     <audio id="audio"></audio>
 
     <script>
-        // كود الـ JavaScript الخاص بك مع الرابط المطلوب
+        // الـ JavaScript اللي بعته بالحرف مع الرابط المطلوب
         const audio = document.getElementById("audio");
         const musicBtn = document.getElementById("musicBtn");
         const icon = musicBtn.querySelector("span");
 
-        // الرابط الذي قدمته أنت
+        // الرابط اللي أنت اخترته
         const stream = "https://live.mp3quran.net:8006/;stream.mp3";
 
         let playing = false;
