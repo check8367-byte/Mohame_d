@@ -9,17 +9,13 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: #111;
       color: white;
       text-align: center;
     }
 
     .container {
       padding: 40px 20px;
-    }
-
-    h1 {
-      margin-bottom: 20px;
     }
 
     .link-card {
@@ -44,7 +40,7 @@
       opacity: 0.6;
     }
 
-    /* زر الصوت */
+    /* زر الموسيقى */
     #musicBtn {
       position: fixed;
       bottom: 20px;
@@ -60,12 +56,7 @@
       cursor: pointer;
       z-index: 100;
       transition: 0.3s;
-      color: white;
       font-size: 22px;
-    }
-
-    #musicBtn:hover {
-      transform: scale(1.1);
     }
 
     #musicBtn.playing {
@@ -84,7 +75,7 @@
       Sarhne
     </a>
 
-    <footer>Mohamed Mahmoud © 2026</footer>
+    <footer>Mohamed Mahmoud 2026 ©</footer>
   </div>
 
   <!-- زر التشغيل -->
@@ -96,11 +87,11 @@
   <audio id="audio"></audio>
 
   <script>
+    // بث إذاعة القرآن الكريم
     const audio = document.getElementById("audio");
     const musicBtn = document.getElementById("musicBtn");
     const icon = musicBtn.querySelector("span");
 
-    // بث إذاعة القرآن الكريم
     const stream = "https://stream.radiojar.com/8s5u5tpdtwzuv";
 
     let playing = false;
@@ -116,8 +107,8 @@
           icon.textContent = "🔊";
           musicBtn.classList.add("playing");
         })
-        .catch((err) => {
-          console.log("Autoplay blocked:", err);
+        .catch(err => {
+          console.log("المتصفح منع التشغيل", err);
         });
     }
 
@@ -138,7 +129,7 @@
     }, { once: true });
 
     audio.addEventListener("error", () => {
-      console.log("Stream error");
+      console.log("خطأ في البث");
       pauseAudio();
     });
   </script>
